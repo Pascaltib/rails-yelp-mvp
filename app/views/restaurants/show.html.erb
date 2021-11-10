@@ -1,0 +1,39 @@
+<h1 class= "text-center"><%= @restaurant.name.capitalize %></h1>
+<div class="row mt-5 justify-content-center">
+  <div class="col-12 text-center h3">
+    Address: <%= @restaurant.address %>
+  </div>
+  <div class="col-12 text-center h3">
+    Category: <%=@restaurant.category.capitalize%>
+  </div>
+  <div class="col-12 text-center h3">
+    <%= link_to edit_restaurant_path(@restaurant) do %>
+        <i class="fas fa-edit" style="font-size: 22px;"></i>
+      <% end %>
+       <%= link_to restaurant_path(@restaurant) , method: :delete, data: {confirm: "Are you sure?"} do%>
+        <i class="fas fa-trash" style="font-size: 22px;"></i>
+      <% end %>
+  </div>
+  <div class="col-12 text-center h3">
+    Reviews:
+  </div>
+  <% @reviews.each do |review| %>
+    <li class="col-7 h5 mb-3">
+      <%=review.rating%>/5 - <%=review.content%>
+    </li>
+  <% end %>
+  <div class="col-12">
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= f.input :rating %>
+      <%= f.input :content %>
+      <%= f.submit "Add review", class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+  <div class="col-12 text-center h3">
+    <%= link_to restaurants_path do %>
+      <button class="btn btn-lg btn-primary">
+      Go Back
+      </button>
+    <% end %>
+  </div>
+</div>

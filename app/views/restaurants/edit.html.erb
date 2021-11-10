@@ -1,0 +1,11 @@
+<h1 class= "text-center">Edit <%= @restaurant.name  %>!</h1>
+<div class="row mt-5 justify-content-center">
+  <div class="col-12">
+    <%= simple_form_for(@restaurant) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :address %>
+      <%= f.input :category, as: :select, collection: %w[chinese italian japanese french belgian], prompt: 'Select Category'%>
+      <%= f.submit "Add restaurant", class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</div>

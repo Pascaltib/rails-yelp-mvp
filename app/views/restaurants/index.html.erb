@@ -1,0 +1,22 @@
+<h1 class= "text-center">Yelp</h1>
+<div class="row justify-content-center">
+  <% @restaurants.each do |restaurant| %>
+    <div class="col-7 text-center h3">
+      <%= link_to restaurant_path(restaurant) do%>
+      <strong><%=restaurant.name.capitalize%></strong> - <%=restaurant.category.capitalize%>
+      <% end %>
+       <%= link_to edit_restaurant_path(restaurant) do %>
+        <i class="fas fa-edit" style="font-size: 22px;"></i>
+      <% end %>
+       <%= link_to restaurant_path(restaurant) , method: :delete, data: {confirm: "Are you sure?"} do%>
+        <i class="fas fa-trash" style="font-size: 22px;"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="col-12"></div>
+    <%= link_to new_restaurant_path do %>
+      <button class="btn btn-lg btn-primary">
+      Add a new restaurant
+      </button>
+    <% end %>
+</div>
