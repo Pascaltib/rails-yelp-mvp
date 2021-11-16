@@ -18,6 +18,6 @@ cat_arr = %w[chinese italian japanese french belgian]
     }
   )
   5.times do
-    Review.create({ rating: rand(6), content: Faker::Quote.yoda , restaurant: temp})
+    Review.create({ rating: rand(6), content: Faker::Quote.yoda, restaurant: temp })
   end
 end
