@@ -1,5 +1,14 @@
-<h1 class= "text-center"><%= @restaurant.name.capitalize %></h1>
-<div class="row mt-5 justify-content-center">
+<div class="d-flex justify-content-center">
+  <h1 class= "text-center mr-4"><%= @restaurant.name.capitalize %></h1>
+  <div class="h3">
+    <%= link_to restaurants_path do %>
+      <button class="btn btn-lg btn-primary">
+      Go Back
+      </button>
+    <% end %>
+  </div>
+</div>
+<div class="row mt-5 flex">
   <div class="col-12 text-center h3">
     Address: <%= @restaurant.address %>
   </div>
@@ -14,26 +23,30 @@
         <i class="fas fa-trash" style="font-size: 22px;"></i>
       <% end %>
   </div>
-  <div class="col-12 text-center h3">
-    Reviews:
+  <div class="col-12 d-flex justify-content-between align-items-center">
+    <div class="w-25" style="margin-left: 200px;">
+      <div class="h3">
+        Reviews:
+      </div>
+
+      <ul class="p-0" style="max-height:200px; overflow-y:auto;">
+        <% @reviews.each do |review| %>
+          <li class="h5 mb-3" style="list-style:none;">
+            <%=review.rating%>/5 - <%=review.content%>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="text-center h3" style="margin-right: 200px;">
+      Average Rating: <%= number_with_precision @restaurant.average, precision: 2 %>
+    </div>
   </div>
-  <% @reviews.each do |review| %>
-    <li class="col-7 h5 mb-3">
-      <%=review.rating%>/5 - <%=review.content%>
-    </li>
-  <% end %>
-  <div class="col-12">
-    <%= simple_form_for [@restaurant, @review] do |f| %>
+
+  <div class="col-12 d-flex justify-content-center">
+    <%= simple_form_for [@restaurant, @review], html:{class:"w-50"} do |f| %>
       <%= f.input :rating %>
       <%= f.input :content %>
       <%= f.submit "Add review", class: "btn btn-lg btn-primary" %>
-    <% end %>
-  </div>
-  <div class="col-12 text-center h3">
-    <%= link_to restaurants_path do %>
-      <button class="btn btn-lg btn-primary">
-      Go Back
-      </button>
     <% end %>
   </div>
 </div>

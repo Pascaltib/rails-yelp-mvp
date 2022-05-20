@@ -10,6 +10,9 @@ class ReviewsController < ApplicationController
     @restaurant = Restaurant.find(params[:restaurant_id])
     @review.restaurant = @restaurant
     if @review.save
+      calc = @restaurant.reviews.average(:rating)
+      @restaurant.update!(average: calc)
+      raise
       redirect_to restaurant_path(@restaurant)
     else
       @reviews = @restaurant.reviews
